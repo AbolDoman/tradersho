@@ -1,0 +1,4 @@
+dist
+server/drizzle
+server/data
+package-lock.json

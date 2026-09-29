@@ -2,7 +2,7 @@
 
 A small expense-sharing app inspired by Splitwise. Record who paid for whom and see the net balance between every pair of people.
 
-Live demo: _coming soon_
+Live demo: https://tradersho.onrender.com
 
 The demo runs on Render's free plan. It sleeps after 15 minutes without traffic, so the first request after that can take up to a minute. Render's free plan has no persistent disk either, which means the database goes back to the sample data whenever the service restarts.
 

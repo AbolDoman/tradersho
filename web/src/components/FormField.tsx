@@ -2,7 +2,7 @@ import type { User } from "@tally/shared";
 import { useId, type ReactNode } from "react";
 
 export const inputClass =
-  "block w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-stone-900 shadow-xs placeholder:text-stone-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20 disabled:bg-stone-50 aria-invalid:border-red-400";
+  "block w-full rounded-lg border border-stone-300 bg-white px-3 py-2 shadow-xs placeholder:text-stone-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20 disabled:bg-stone-50 aria-invalid:border-red-400";
 
 export interface ControlProps {
   id: string;
@@ -57,22 +57,38 @@ export function UserSelect({
   ...props
 }: UserSelectProps) {
   return (
-    <select
-      {...props}
-      data-autofocus={autoFocus || undefined}
-      value={value}
-      disabled={!users}
-      onChange={(event) => onChange(event.target.value)}
-      className={inputClass}
-    >
-      <option value="" disabled>
-        {users ? "Select…" : "Loading…"}
-      </option>
-      {users?.map((user) => (
-        <option key={user.id} value={user.id} disabled={String(user.id) === disabledUserId}>
-          {user.name}
+    <div className="relative">
+      <select
+        {...props}
+        data-autofocus={autoFocus || undefined}
+        value={value}
+        disabled={!users}
+        onChange={(event) => onChange(event.target.value)}
+        className={`${inputClass} cursor-pointer appearance-none pr-9 disabled:cursor-default ${
+          value ? "" : "text-stone-400"
+        } [&>option]:text-stone-900`}
+      >
+        <option value="" disabled>
+          {users ? "Select person" : "Loading…"}
         </option>
-      ))}
-    </select>
+        {users?.map((user) => (
+          <option key={user.id} value={user.id} disabled={String(user.id) === disabledUserId}>
+            {user.name}
+          </option>
+        ))}
+      </select>
+      <svg
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 right-3 my-auto size-4 text-stone-400"
+      >
+        <path
+          fillRule="evenodd"
+          d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+          clipRule="evenodd"
+        />
+      </svg>
+    </div>
   );
 }
